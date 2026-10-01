@@ -1,0 +1,212 @@
+/* ---------- Design tokens (light is default) ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #141414;
+  --muted: #5b5b63;
+  --brand: #12a150;
+  --field: #e0dde5;
+  --field-text: #2a2a30;
+  --focus: #0b6b34;
+  --error: #c0392b;
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Newsreader", Georgia, serif;
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+}
+
+:root[data-theme="dark"] {
+  --bg: #101114;
+  --text: #f2f1ee;
+  --muted: #a6a6b0;
+  --brand: #3ddc84;
+  --field: #2a2a32;
+  --field-text: #f2f1ee;
+  --focus: #3ddc84;
+  --error: #ff8a7a;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* The [hidden] attribute must beat any display rule we set later. */
+[hidden] { display: none !important; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.brand { color: var(--brand); font-style: italic; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem var(--gutter);
+}
+
+.navbar__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.navbar__wordmark {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--brand);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.navbar__links a {
+  text-decoration: none;
+  padding: 0.5rem 0.25rem;       /* bigger touch target */
+}
+.navbar__links a:hover { color: var(--brand); }
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;                /* 44px minimum touch target */
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+.icon-button:hover { background: var(--field); }
+
+/* Show the sun in light theme, the moon in dark theme */
+.icon-moon { display: none; }
+:root[data-theme="dark"] .icon-sun  { display: none; }
+:root[data-theme="dark"] .icon-moon { display: block; }
+
+/* ---------- Hero ---------- */
+.hero {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: clamp(3rem, 12vh, 7rem) var(--gutter) 6rem;
+}
+
+.hero__title {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(2.5rem, 7vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.hero__text {
+  margin: 0 0 2rem;
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  text-wrap: pretty;
+}
+
+.hero__status { margin-top: 1.5rem; color: var(--muted); }
+
+/* ---------- Search ---------- */
+.search { width: 100%; }
+
+.search__field {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.4rem 0.35rem 1.25rem;
+  background: var(--field);
+  border-radius: 999px;
+}
+.search__field:focus-within {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.search__input {
+  flex: 1;
+  min-width: 0;                  /* lets the input shrink on narrow phones */
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--field-text);
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;               /* 16px+ stops iOS zooming in on focus */
+}
+.search__input::placeholder { color: var(--muted); }
+.search__input:focus { outline: none; }  /* the ring is drawn on .search__field */
+
+.search__submit {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--field-text);
+  cursor: pointer;
+}
+.search__submit:hover { color: var(--brand); }
+
+.search__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.search__error {
+  margin: 0.75rem 1.25rem 0;
+  color: var(--error);
+  font-size: 0.95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
