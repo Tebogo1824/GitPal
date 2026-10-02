@@ -8,10 +8,17 @@
   <title>About | RepoHug</title>
   <meta name="description" content="What RepoHug is, how it works, and where its data comes from." />
 
-  <script>
-    document.documentElement.dataset.theme =
-      window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  </script>
+ <script>
+  (function () {
+    let theme = null;
+    // try/catch: localStorage can be blocked (e.g. some private modes)
+    try { theme = localStorage.getItem("theme"); } catch (e) { }
+    if (theme !== "dark" && theme !== "light") {
+      theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    document.documentElement.dataset.theme = theme;
+  })();
+</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
