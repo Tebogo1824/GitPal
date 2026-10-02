@@ -52,6 +52,34 @@ function parseUsername(text) {
   return USERNAME_PATTERN.test(candidate) ? candidate : null;
 }
 
+
+/* ------------------------------------------------------------------
+   Everything below belongs to the search form, which only exists
+   on the homepage. On other pages `form` is null, so we skip it.
+------------------------------------------------------------------- */
+if (form && input && avatar) {
+
+  /* ---- 4. The green circle ... (your existing code, unchanged) ---- */
+  input.addEventListener("input", () => {
+    const letter = input.value.trim().replace(/^@/, "").charAt(0).toUpperCase();
+    avatar.textContent = letter || "A";
+  });
+
+  /* ---- 5. Handle the form submit ... (your existing code, unchanged) ---- */
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const query = input.value.trim();
+
+    if (!query) return;
+
+    console.log("Searching for:", query);
+
+    // Example: redirect to a search page
+    window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+  });
+
+} // end of search-form guard
 /* ------------------------------------------------------------------
    4. The green circle shows the first letter typed (default "A")
 ------------------------------------------------------------------- */
