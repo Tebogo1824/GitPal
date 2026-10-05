@@ -27,15 +27,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script src="theme.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
 
   <header class="navbar">
-    <a class="navbar__brand" href="index.html" aria-label="RepoHug home"></a>
-      <!-- LOGO SLOT: <img src="logo.svg" alt="" width="28" height="28" /> -->
-      <span class="navbar__wordmark1">.RepoHug</span>
-    </a>
+    <a class="navbar__brand" href="index.html" aria-label="RepoHug home">
+  <span class="navbar__wordmark1">.RepoHug</span>
+</a>
 
     <nav aria-label="Main">
       <ul class="navbar__links">
@@ -93,10 +93,10 @@
         <!-- Empty until JS has something to say. role="alert" makes screen readers announce it. -->
         <p class="search__error" id="search-error" role="alert" hidden></p>
       </form>
+        <p class="hero__status" id="search-status" aria-live="polite" hidden></p>
       <ul id="repo-list"> </ul>
 
-      <p class="hero__status" id="search-status" aria-live="polite" hidden></p>
-    </section>
+  </section>
   </main>
 
 </body>
