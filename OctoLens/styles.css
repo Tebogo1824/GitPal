@@ -1,9 +1,12 @@
 /* ---------- Design tokens (light is default) ---------- */
 :root {
   --bg: #ffffff;
+  --surface: #f7f8f7;
+  --border: #e2e5e2;
   --text: #141414;
   --muted: #5b5b63;
   --brand: #12a150;
+  --accent: #12a150;
   --field: #e0dde5;
   --field-text: #2a2a30;
   --focus: #0b6b34;
@@ -17,9 +20,12 @@
 
 :root[data-theme="dark"] {
   --bg: #101114;
+  --surface: #191a1f;
+  --border: #303238;
   --text: #f2f1ee;
   --muted: #a6a6b0;
   --brand: #3ddc84;
+  --accent: #3ddc84;
   --field: #2a2a32;
   --field-text: #f2f1ee;
   --focus: #3ddc84;
@@ -36,6 +42,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow: auto;
 }
 
 a { color: inherit; }
@@ -285,7 +292,12 @@ a { color: inherit; }
 
 .feature-card {
   background: var(--surface);
+  background-clip: border-box;
   border: 1px solid var(--border);
+  border-radius: 12px;
+  
+    background: var(--surface);
+    
   padding: 35px;
   min-height: 240px;
   transition: transform 0.25s ease, border-color 0.25s ease;
@@ -325,24 +337,30 @@ a { color: inherit; }
 /* PRINCIPLES */
 
 .principles {
-  padding: 100px 0;
+  margin: 0 0 2rem;
+  padding: clamp(2rem, 6vw, 4rem);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
 }
 
-.principles h2 {
+.h2 {
   font-size: clamp(2rem, 5vw, 4rem);
   letter-spacing: -0.05em;
   margin-bottom: 60px;
 }
 
-.principle-list {
+.principles-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
 .principle-list div {
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
 }
 
 .principle-list h3 {
