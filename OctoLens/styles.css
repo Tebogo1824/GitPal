@@ -9,7 +9,7 @@
   --accent: #12a150;
   --field: #e0dde5;
   --field-text: #2a2a30;
-  --focus: #0b6b34;
+  --focus: #18d168;
   --error: #c0392b;
 
   --font-display: "Instrument Serif", Georgia, serif;
@@ -139,6 +139,7 @@ a { color: inherit; }
   padding: clamp(3rem, 12vh, 7rem) var(--gutter) 6rem;
   animation-name: hero-fade-in;
   animation-duration: 0.8s;
+  animation-timing-function: ease-in-out;
 }
 @keyframes hero-fade-in {
   from { opacity: 0; transform: translateY(100px); }
