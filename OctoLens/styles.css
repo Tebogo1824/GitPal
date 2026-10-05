@@ -25,6 +25,265 @@
   --focus: #3ddc84;
   --error: #ff8a7a;
 }
+/* ---------- About page ---------- */
+.about-page {
+  width: min(1100px, 90%);
+  margin: auto;
+  padding: 80px 0;
+  height: 100%;
+}
+
+/* HERO */
+
+.hero {
+  max-width: 850px;
+  padding: 80px 0 120px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+  margin-bottom: 30px;
+}
+
+.hero-text {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+/* SECTIONS */
+
+.about-section {
+  border-top: 1px solid var(--border);
+  padding: 70px 0;
+}
+
+.section-heading {
+  display: flex;
+  gap: 25px;
+  align-items: start;
+  margin-bottom: 30px;
+}
+
+.section-heading span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.section-heading h2,
+.about-section h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.about-section>p {
+  max-width: 750px;
+  margin-left: 55px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* CARDS */
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 30px 0 100px;
+}
+
+.feature-card {
+  background: var(--surface);
+  background-clip: border-box;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  
+    background: var(--surface);
+    
+  padding: 35px;
+  min-height: 240px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  border-color: #4b535e;
+}
+
+.card-number {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.feature-card h3 {
+  margin: 45px 0 12px;
+  font-size: 1.4rem;
+}
+
+.feature-card p {
+  color: var(--muted);
+}
+
+/* SPLIT SECTION */
+
+.split-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+.split-section>p {
+  margin: 0;
+}
+
+/* PRINCIPLES */
+
+.principles {
+  margin: 0 0 2rem;
+  padding: clamp(2rem, 6vw, 4rem);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.principles:hover {
+  transform: translateY(-5px);
+  border-color: #4b535e;
+}
+
+.principles h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+  margin-bottom: 60px;
+}
+
+.principles-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.principle-list div {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.principle-list h3 {
+  margin-bottom: 10px;
+}
+
+.principle-list p {
+  color: var(--muted);
+}
+
+/* LEARNING */
+
+.learning-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 60px;
+}
+
+.learning-section h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+  margin-bottom: 25px;
+}
+
+.learning-section>p {
+  max-width: 700px;
+  color: var(--muted);
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 35px;
+}
+
+.tech-stack span {
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+/* CTA */
+
+.cta {
+  text-align: center;
+  padding: 130px 20px 80px;
+}
+
+.cta h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: -0.05em;
+  margin-bottom: 15px;
+}
+
+.cta p {
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.cta a {
+  display: inline-block;
+  background: var(--accent);
+  color: #000;
+  padding: 13px 22px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+}
+
+.cta a:hover {
+  opacity: 0.8;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .about-page {
+    padding: 40px 0;
+  }
+
+  .hero {
+    padding: 50px 0 80px;
+  }
+
+  .feature-grid,
+  .principle-list,
+  .split-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section>p {
+    margin-left: 0;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .learning-section {
+    padding: 35px 25px;
+  }
+}
 
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
