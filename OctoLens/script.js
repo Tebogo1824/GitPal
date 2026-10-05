@@ -1,5 +1,19 @@
+"use strict";
+
 /* ------------------------------------------------------------------
-   3. Username parsing (unchanged)
+   1. Grab the elements we need (once, at the top)
+   This file is only loaded by index.html. The theme toggle lives in theme.js.
+------------------------------------------------------------------- */
+const form = document.getElementById("search-form");
+const input = document.getElementById("github-input");
+const avatar = document.getElementById("search-avatar");
+const errorMessage = document.getElementById("search-error");
+const statusMessage = document.getElementById("search-status");
+const repoList = document.getElementById("repo-list");
+const submitButton = form.querySelector('button[type="submit"]');
+
+/* ------------------------------------------------------------------
+   2. Username parsing
 ------------------------------------------------------------------- */
 const USERNAME_PATTERN = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
@@ -14,7 +28,7 @@ function parseUsername(text) {
 }
 
 /* ------------------------------------------------------------------
-   4. Avatar letter (unchanged)
+   3. Avatar letter
 ------------------------------------------------------------------- */
 input.addEventListener("input", () => {
   const letter = input.value.trim().replace(/^@/, "").charAt(0).toUpperCase();
@@ -22,7 +36,7 @@ input.addEventListener("input", () => {
 });
 
 /* ------------------------------------------------------------------
-   5. Talking to the GitHub API
+   4. Talking to the GitHub API
 ------------------------------------------------------------------- */
 const PER_PAGE = 100; // GitHub's maximum per request
 const MAX_PAGES = 10; // safety cap: at most 1000 repos
@@ -51,8 +65,12 @@ async function fetchRepos(username, signal) {
       throw new GitHubError(`User "${username}" was not found.`);
     }
     if (response.status === 403 || response.status === 429) {
+      const resetSeconds = Number(response.headers.get("x-ratelimit-reset"));
+      const resetTime = resetSeconds
+        ? new Date(resetSeconds * 1000).toLocaleTimeString()
+        : "later";
       throw new GitHubError(
-        "GitHub rate limit reached (60 requests/hour without a token). Try again later."
+        `GitHub rate limit reached (60 requests/hour). You can search again at ${resetTime}.`
       );
     }
     if (!response.ok) {
@@ -72,7 +90,7 @@ async function fetchRepos(username, signal) {
 }
 
 /* ------------------------------------------------------------------
-   6. Rendering
+   5. Rendering
    We build elements with createElement + textContent (never innerHTML)
    so repo names/descriptions can't inject HTML into the page.
 ------------------------------------------------------------------- */
@@ -166,7 +184,7 @@ function renderRepos(repos) {
 }
 
 /* ------------------------------------------------------------------
-   7. UI helpers + form submit
+   6. UI helpers + form submit
 ------------------------------------------------------------------- */
 function showError(message) {
   errorMessage.textContent = message;
@@ -215,7 +233,9 @@ form.addEventListener("submit", async (event) => {
     }
 
     renderRepos(repos);
-    showStatus(`${username} has ${repos.length} public ${repos.length === 1 ? "repository" : "repositories"}.`);
+    showStatus(
+      `${username} has ${repos.length} public ${repos.length === 1 ? "repository" : "repositories"}.`
+    );
   } catch (error) {
     if (error.name === "AbortError") return; // replaced by a newer search
 

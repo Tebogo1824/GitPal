@@ -1,32 +1,34 @@
 "use strict";
 
-/* ------------------------------------------------------------------
-   1. Grab the elements we need (once, at the top)
-------------------------------------------------------------------- */
-const root = document.documentElement;
-const themeToggle = document.getElementById("theme-toggle");
-const form = document.getElementById("search-form");
-const input = document.getElementById("github-input");
-const avatar = document.getElementById("search-avatar");
-const errorMessage = document.getElementById("search-error");
-const statusMessage = document.getElementById("search-status");
-const repoList = document.getElementById("repo-list"); // NEW: <ul id="repo-list"></ul>
-const submitButton = form.querySelector('button[type="submit"]');
+// Wrapped in a function so its variable names don't clash with script.js
+// when both files are loaded on the same page.
+(function () {
+  const root = document.documentElement;
+  const themeToggle = document.getElementById("theme-toggle");
 
-/* ------------------------------------------------------------------
-   2. Theme toggle (unchanged)
-------------------------------------------------------------------- */
-function updateToggleLabel() {
-  const isDark = root.dataset.theme === "dark";
-  themeToggle.setAttribute(
-    "aria-label",
-    isDark ? "Switch to light theme" : "Switch to dark theme"
-  );
-}
+  // No toggle button on this page? Nothing to do.
+  if (!themeToggle) return;
 
-themeToggle.addEventListener("click", () => {
-  root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+  function updateToggleLabel() {
+    const isDark = root.dataset.theme === "dark";
+    themeToggle.setAttribute(
+      "aria-label",
+      isDark ? "Switch to light theme" : "Switch to dark theme"
+    );
+  }
+
+  themeToggle.addEventListener("click", () => {
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    updateToggleLabel();
+
+    // Remember the choice so every page (and the next visit) uses it.
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // Storage can be blocked (e.g. some private modes); the toggle still works.
+    }
+  });
+
   updateToggleLabel();
-});
-
-updateToggleLabel();
+})();
