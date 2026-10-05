@@ -11,9 +11,13 @@
     (function () {
       let theme = null;
       // try/catch: localStorage can be blocked (e.g. some private modes)
-      try { theme = localStorage.getItem("theme"); } catch (e) { }
+      try { 
+        theme = localStorage.getItem("theme"); 
+      } 
+      catch (e) { }
       if (theme !== "dark" && theme !== "light") {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        theme = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches ? "dark" : "light";
       }
       document.documentElement.dataset.theme = theme;
     })();
