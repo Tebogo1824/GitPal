@@ -131,6 +131,12 @@ a { color: inherit; }
   max-width: 40rem;
   margin: 0 auto;
   padding: clamp(3rem, 12vh, 7rem) var(--gutter) 6rem;
+  animation-name: hero-fade-in;
+  animation-duration: 0.8s;
+}
+@keyframes hero-fade-in {
+  from { opacity: 0; transform: translateY(200px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .hero__title {
@@ -344,7 +350,12 @@ a { color: inherit; }
   background: var(--surface);
 }
 
-.h2 {
+.principles:hover {
+  transform: translateY(-5px);
+  border-color: #4b535e;
+}
+
+.principles h2 {
   font-size: clamp(2rem, 5vw, 4rem);
   letter-spacing: -0.05em;
   margin-bottom: 60px;
