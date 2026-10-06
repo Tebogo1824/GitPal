@@ -33,7 +33,26 @@
 }
 
 /* ---------- Base ---------- */
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Includes padding and borders in the element's total width */
+}
+*{
+  outline: 1 px solid red !important;
+}
+/* --- Base Mobile Styles --- */
+.sidebar {
+  width: 100%; /* Stacks on top of or below other elements */
+}
+
+/* --- Tablet / Desktop Styles (Screens wider than 768px) --- */
+@media (min-width: 768px) {
+  .sidebar {
+    width: 25%; /* Becomes a side-by-side panel on wider screens */
+  }
+}
+
 
 body {
   margin: 0;
