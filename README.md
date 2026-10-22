@@ -278,6 +278,7 @@ repohug/
   analysis.css     analysis panel layout and chart colors
   theme.js         light/dark toggle
   script.js        search, GitHub lookup, repo cards
+  contributors_api.py Get contributors by name and repository name
   analysis.js      analysis panel, charts, request cache
   images/          screenshots and the system diagram
   README.md
